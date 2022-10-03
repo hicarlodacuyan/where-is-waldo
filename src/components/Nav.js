@@ -1,15 +1,15 @@
 import React from "react";
 import Logo from "./Logo";
-import Timer from "./Timer";
+import Stopwatch from "./Stopwatch";
 import Counter from "./Counter";
 
 function Nav() {
   return (
-    <div className="flex justify-between">
+    <nav className="flex justify-around items-center py-2 border-b-[1px] border-slate-200 bg-slate-50 fixed w-full">
       <Logo />
-      <Timer />
+      <Stopwatch />
       <Counter />
-    </div>
+    </nav>
   );
 }
 
