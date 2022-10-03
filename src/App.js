@@ -1,8 +1,32 @@
 import "./App.css";
+import { useState, useEffect } from "react";
+import { db } from "./firebase-config";
+import { collection, getDocs } from "firebase/firestore";
 
 const App = () => {
+  const charactersCollectionRef = collection(db, "characters");
+  const [characters, setCharacters] = useState([]);
+
+  useEffect(() => {
+    const getCharacters = async () => {
+      const data = await getDocs(charactersCollectionRef);
+      const charactersList = data.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+
+      setCharacters(charactersList);
+    };
+
+    getCharacters();
+  }, []);
+
   return (
-    <h1 className="text-3xl font-bold text-slate-300 p-4">Hello world!</h1>
+    <ul>
+      {characters.map((character) => {
+        return <li key={character.id}>{character.name}</li>;
+      })}
+    </ul>
   );
 };
 
