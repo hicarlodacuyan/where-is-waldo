@@ -2,6 +2,8 @@ import "./App.css";
 import { useState, useEffect } from "react";
 import { db } from "./firebase-config";
 import { collection, getDocs } from "firebase/firestore";
+import Nav from "./components/Nav";
+import Main from "./components/Main";
 
 const App = () => {
   const charactersCollectionRef = collection(db, "characters");
@@ -22,11 +24,10 @@ const App = () => {
   }, []);
 
   return (
-    <ul>
-      {characters.map((character) => {
-        return <li key={character.id}>{character.name}</li>;
-      })}
-    </ul>
+    <div className="App">
+      <Nav />
+      <Main />
+    </div>
   );
 };
 
