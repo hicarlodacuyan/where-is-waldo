@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 function Stopwatch() {
   const [time, setTime] = useState(0);
-  const [running, setRunning] = useState(true);
+  const [running, setRunning] = useState(false);
 
   useEffect(() => {
     let interval;
