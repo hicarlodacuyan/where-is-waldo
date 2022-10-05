@@ -1,33 +1,38 @@
 import "./App.css";
-import { useState, useEffect } from "react";
-import { db } from "./firebase-config";
-import { collection, getDocs } from "firebase/firestore";
 import Nav from "./components/Nav";
 import Main from "./components/Main";
+import { useState } from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
-  const charactersCollectionRef = collection(db, "characters");
-  const [characters, setCharacters] = useState([]);
   const [gameIsRunning, setGameIsRunning] = useState(false);
-
-  useEffect(() => {
-    const getCharacters = async () => {
-      const data = await getDocs(charactersCollectionRef);
-      const charactersList = data.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
-
-      setCharacters(charactersList);
-    };
-
-    getCharacters();
-  }, []);
+  const [characters, setCharacters] = useState([
+    { id: 1, name: "Monkey", coordx: 703, coordy: 1277 },
+    { id: 2, name: "Dog", coordx: 387, coordy: 1558 },
+    { id: 3, name: "Swiper", coordx: 583, coordy: 1304 },
+  ]);
 
   return (
     <div className="App">
-      <Nav gameIsRunning={gameIsRunning} />
-      <Main setGameIsRunning={setGameIsRunning} />
+      <Nav characters={characters} gameIsRunning={gameIsRunning} />
+      <Main
+        characters={characters}
+        setCharacters={setCharacters}
+        setGameIsRunning={setGameIsRunning}
+      />
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        limit={3}
+      />
     </div>
   );
 };
