@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from "react";
 
-function Stopwatch() {
+function Stopwatch({ gameIsRunning }) {
   const [time, setTime] = useState(0);
-  const [running, setRunning] = useState(false);
 
   useEffect(() => {
     let interval;
 
-    if (running) {
+    if (gameIsRunning) {
       interval = setInterval(() => {
         setTime((prevTime) => prevTime + 10);
       }, 10);
-    } else if (!running) {
+    } else if (!gameIsRunning) {
       clearInterval(interval);
     }
 
     return () => clearInterval(interval);
-  }, [running]);
+  }, [gameIsRunning]);
 
   return (
     <div className="md:text-4xl text-2xl font-bold">

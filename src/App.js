@@ -8,6 +8,7 @@ import Main from "./components/Main";
 const App = () => {
   const charactersCollectionRef = collection(db, "characters");
   const [characters, setCharacters] = useState([]);
+  const [gameIsRunning, setGameIsRunning] = useState(false);
 
   useEffect(() => {
     const getCharacters = async () => {
@@ -25,8 +26,8 @@ const App = () => {
 
   return (
     <div className="App">
-      <Nav />
-      <Main />
+      <Nav gameIsRunning={gameIsRunning} />
+      <Main setGameIsRunning={setGameIsRunning} />
     </div>
   );
 };
