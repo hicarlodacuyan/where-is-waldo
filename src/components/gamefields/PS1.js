@@ -1,14 +1,14 @@
 import React from "react";
 import Field from "../../images/ps1-field.jpg";
 
-const PS1 = ({ getCoords }) => {
+const PS1 = ({ displayMenu }) => {
   return (
     <svg
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
       viewBox="0 0 1080 2340"
-      onClick={getCoords}
+      onClick={displayMenu}
     >
       <image width="1080" height="2340" xlinkHref={Field}></image>
 

@@ -7,11 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   const [gameIsRunning, setGameIsRunning] = useState(false);
-  const [characters, setCharacters] = useState([
-    { id: 1, name: "Monkey", coordx: 703, coordy: 1277 },
-    { id: 2, name: "Dog", coordx: 387, coordy: 1558 },
-    { id: 3, name: "Swiper", coordx: 583, coordy: 1304 },
-  ]);
+  const [characters, setCharacters] = useState([{}, {}, {}]);
 
   return (
     <div className="App">
