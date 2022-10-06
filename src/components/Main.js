@@ -1,16 +1,24 @@
 import React from "react";
 import PS1 from "./gamefields/PS1";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { db } from "../firebase-config";
 import { collection, getDocs } from "firebase/firestore";
 import { toast } from "react-toastify";
-import { Menu, Item, useContextMenu, theme } from "react-contexify";
+import { Menu, Item, useContextMenu } from "react-contexify";
 import "react-contexify/dist/ReactContexify.css";
 
 const MENU_ID = "menu-id";
 
-function Main({ characters, setCharacters, setGameIsRunning }) {
+function Main({
+  characters,
+  setCharacters,
+  gameIsRunning,
+  setGameIsRunning,
+  gameIsOver,
+  setGameIsOver,
+}) {
   const charactersCollectionRef = collection(db, "characters");
+
   const { show } = useContextMenu({ id: MENU_ID });
 
   useEffect(() => {
@@ -30,6 +38,18 @@ function Main({ characters, setCharacters, setGameIsRunning }) {
   const identifyCharacter = (coords, name) => {
     const x = coords.x;
     const y = coords.y;
+
+    if (coords.x === 0 && coords.y === 0 && gameIsOver === false) {
+      toast.error("Uh oh! Wrong character.", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
 
     const filteredCharacters = characters.filter((character) => {
       if (
@@ -60,14 +80,15 @@ function Main({ characters, setCharacters, setGameIsRunning }) {
   const isGameOver = (characters) => {
     if (characters.length < 1) {
       setGameIsRunning(false);
+      setGameIsOver(true);
       return;
     }
+
+    setGameIsRunning(true);
   };
 
   const getCoords = (event) => {
     const coords = event.target.getBBox();
-
-    setGameIsRunning(true);
 
     return coords;
   };
@@ -80,18 +101,6 @@ function Main({ characters, setCharacters, setGameIsRunning }) {
   };
 
   const handleItemClick = ({ event, props }) => {
-    if (props.coords.x === 0 && props.coords.y === 0) {
-      toast.error("Uh oh! Wrong character.", {
-        position: "top-center",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-    }
-
     switch (event.currentTarget.id) {
       case "Dog":
         identifyCharacter(props.coords, event.currentTarget.id);
@@ -109,9 +118,9 @@ function Main({ characters, setCharacters, setGameIsRunning }) {
   };
 
   return (
-    <div>
+    <div className="cursor-crosshair">
       <PS1 displayMenu={displayMenu} />
-      <Menu id={MENU_ID} theme={theme.light}>
+      <Menu id={MENU_ID}>
         <Item id="Dog" onClick={handleItemClick}>
           Dog
         </Item>

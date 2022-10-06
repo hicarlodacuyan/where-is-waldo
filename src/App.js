@@ -6,16 +6,24 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
-  const [gameIsRunning, setGameIsRunning] = useState(false);
   const [characters, setCharacters] = useState([{}, {}, {}]);
+  const [gameIsRunning, setGameIsRunning] = useState(false);
+  const [gameIsOver, setGameIsOver] = useState(false);
 
   return (
     <div className="App">
-      <Nav characters={characters} gameIsRunning={gameIsRunning} />
+      <Nav
+        characters={characters}
+        gameIsRunning={gameIsRunning}
+        gameIsOver={gameIsOver}
+      />
       <Main
         characters={characters}
         setCharacters={setCharacters}
+        gameIsRunning={gameIsRunning}
         setGameIsRunning={setGameIsRunning}
+        gameIsOver={gameIsOver}
+        setGameIsOver={setGameIsOver}
       />
       <ToastContainer
         position="top-center"

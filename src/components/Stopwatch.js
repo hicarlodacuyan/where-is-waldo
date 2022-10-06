@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-function Stopwatch({ gameIsRunning }) {
+function Stopwatch({ gameIsRunning, gameIsOver }) {
   const [time, setTime] = useState(0);
 
   useEffect(() => {
@@ -10,7 +10,9 @@ function Stopwatch({ gameIsRunning }) {
       interval = setInterval(() => {
         setTime((prevTime) => prevTime + 10);
       }, 10);
-    } else if (!gameIsRunning) {
+    }
+
+    if (gameIsOver) {
       clearInterval(interval);
     }
 
