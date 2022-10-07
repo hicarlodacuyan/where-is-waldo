@@ -1,6 +1,6 @@
 import React from "react";
 import PS1 from "./gamefields/PS1";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { db } from "../firebase-config";
 import { collection, getDocs } from "firebase/firestore";
 import { toast } from "react-toastify";
