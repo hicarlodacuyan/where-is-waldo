@@ -102,13 +102,13 @@ function Main({
 
   const handleItemClick = ({ event, props }) => {
     switch (event.currentTarget.id) {
-      case "Dog":
+      case "PaRappa":
         identifyCharacter(props.coords, event.currentTarget.id);
         break;
       case "Monkey":
         identifyCharacter(props.coords, event.currentTarget.id);
         break;
-      case "Swiper":
+      case "Crash Bandicoot":
         identifyCharacter(props.coords, event.currentTarget.id);
         break;
       default:
@@ -121,14 +121,14 @@ function Main({
     <div className="cursor-crosshair">
       <PS1 displayMenu={displayMenu} />
       <Menu id={MENU_ID}>
-        <Item id="Dog" onClick={handleItemClick}>
-          Dog
+        <Item id="PaRappa" onClick={handleItemClick}>
+          PaRappa
         </Item>
         <Item id="Monkey" onClick={handleItemClick}>
           Monkey
         </Item>
-        <Item id="Swiper" onClick={handleItemClick}>
-          Swiper
+        <Item id="Crash Bandicoot" onClick={handleItemClick}>
+          Crash Bandicoot
         </Item>
       </Menu>
     </div>
